@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from "react"
+import {connect} from "react-redux";
+import {getTodos} from "./ducks/todoList/getTodos";
+import Preloader from "./components/Preloader";
+// import userEvent from "@testing-library/user-event";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = (props) => {
+    console.log(props)
+
+    useEffect(() => {
+        props.getTodosFunction("https://uxcandy.com/~shapoval/test-task-backend/v2?developer=pavel")
+    }, [])
+    return (
+        <div>
+            {
+                props.loading
+                ? (
+                    <Preloader />
+                    )
+                    : <h1>Страница</h1>
+            }
+
+        </div>
+    )
 }
 
-export default App;
+function mapStateToProps(state) {
+    return {
+        todos: state.todoList.data,
+        loading: state.todoList.loading
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getTodosFunction: (url) => dispatch(getTodos(url)),
+        // ajaxDel: url => dispatch(ajaxDelTodo(url)),
+
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
