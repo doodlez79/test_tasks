@@ -1,7 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import './index.css'
-// import { BrowserRouter } from 'react-router-dom'
 import { createStore, compose, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import App from './App'
@@ -16,11 +14,9 @@ const composeEnhancers = typeof window === 'object'
 
 const store = createStore(
     rootReducer,
-    applyMiddleware(thunk)
-    // composeEnhancers,
+    composeEnhancers(applyMiddleware(thunk)),
 )
 
-console.log(store)
 const app = (
     <Provider store={ store }>
             <App />

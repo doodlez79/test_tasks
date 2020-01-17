@@ -1,0 +1,25 @@
+.pagin-li {
+
+}
+.pagin {
+  display: flex;
+  list-style: none;
+}
+.li {
+  padding: 5px 10px;
+  border: 1px solid black;
+  cursor: pointer;
+  a {
+    color: black;
+  }
+}
+.link {
+  color: black;
+}
+.active {
+  background: red;
+}
+.container {
+  display: flex;
+  justify-content: center;
+}

@@ -4,19 +4,13 @@ import {
     TODO_GET_SUCCESS
 } from "./actions";
 
+import {APIService} from "../../services/index"
 
-export function getTodos(url) {
-    console.log(url)
+export function getTodos(page, sort, direction ) {
+    console.log(page, sort)
     return  async dispatch => {
         dispatch(Start());
-        return await fetch(url)
-            .then(res => {
-                try {
-                  return res.json()
-                } catch (e) {
-                    dispatch(Error(e))
-                }
-            })
+        return await APIService.get('',page, sort, direction )
             .then(data => {
                if (data.status === "ok") {
                    dispatch(Success(data.message));
